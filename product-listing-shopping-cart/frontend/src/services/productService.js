@@ -2,25 +2,32 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL 
   ? `${import.meta.env.VITE_API_URL}/api/products` 
-  : 'http://localhost:8080/api/products';
+  : 'https://curvy-kiwis-dance.loca.lt/api/products';
+
+const apiClient = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'bypass-tunnel-reminder': 'true'
+  }
+});
 
 export const getProducts = () => {
-  return axios.get(API_BASE_URL);
+  return apiClient.get('');
 };
 
 export const getProductById = (id) => {
-  return axios.get(`${API_BASE_URL}/${id}`);
+  return apiClient.get(`/${id}`);
 };
 
 export const createProduct = (product) => {
-  return axios.post(API_BASE_URL, product);
+  return apiClient.post('', product);
 };
 
 export const updateProduct = (id, product) => {
-  return axios.put(`${API_BASE_URL}/${id}`, product);
+  return apiClient.put(`/${id}`, product);
 };
 
 export const deleteProduct = (id) => {
-  return axios.delete(`${API_BASE_URL}/${id}`);
+  return apiClient.delete(`/${id}`);
 };
 
